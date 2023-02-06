@@ -1,6 +1,7 @@
 package model.entities;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.Objects;
 
 public class Department implements Serializable {
@@ -12,7 +13,7 @@ public class Department implements Serializable {
 	public Department() {
 		
 	}
-	
+		
 	public Department(Integer id, String name) {
 		this.id = id;
 		this.name = name;
