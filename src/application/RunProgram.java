@@ -1,6 +1,5 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,25 +11,40 @@ import model.entities.Seller;
 public class RunProgram {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
 		System.out.println("\n=== TEST 1: seller - findById ===");
-		SellerDao sellerDao = DaoFactory.createSellerDao();
 		Seller seller = sellerDao.findById(3);
 		System.out.println(seller);
-		System.out.println();
-		System.out.println("=== TEST 2: seller - findByDepartment ===");
+		
+		System.out.println("\n=== TEST 2: seller - findByDepartment ===");
 		Department department = new Department(2, null);
 		List<Seller> list = sellerDao.findByDepartment(department);
 		for(Seller obj : list) {
-			System.out.println(seller);
+			System.out.println(obj);
 		}
-		System.out.println();
-		System.out.println("=== TEST 3: seller - findAll ===");
+		
+		System.out.println("\n=== TEST 3: seller - findAll ===");
 		list = sellerDao.findAll();
 		for(Seller obj : list) {
-			System.out.println(seller);
+			System.out.println(obj);
 		}
+		
+		System.out.println("\n=== TEST 4: seller - Insert ===");
+		Seller newSeller = new Seller(null, "Gregory", "gregory@gmail.com", new Date(),4000.0, department);
+		sellerDao.insert(newSeller);
+		System.out.println("Seller Inserted! new ID = " + newSeller.getId());
+		
+		System.out.println("\n=== TEST 5: seller - Update ===");
+		seller = sellerDao.findById(1);
+		seller.setName("Anna Livia");
+		sellerDao.update(seller);
+		System.out.println("Update Completed! ");
+		
+		System.out.println("\n=== TEST 6: seller - Delete ===");
+		int id = 5;
+		sellerDao.deleteById(id);
+		
+		
 	}
-
 }
